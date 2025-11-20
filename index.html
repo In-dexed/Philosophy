@@ -20,7 +20,7 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            height: 100%;
+            height: 110%;
             background-image: url("images/UrbanWild.jpg");
             background-size: cover;
         }
@@ -42,10 +42,15 @@
             color: white;
             font-weight: bold;
         }
+        .text{
+            color: white;
+            font-weight: bold;
+        }
         .slider-group {
             margin-bottom: 1.5rem;
             text-align: center;
             opacity: 1;
+            text-decoration: blue;
         }
         label {
             display: block;
@@ -62,7 +67,7 @@
         }
         .bird{
             -webkit-appearance: none;
-            height: 10px;
+            height: 5px;
             border-radius: 5px;
             background: #d3d3d3;
             outline: none;
@@ -72,8 +77,8 @@
         .bird::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 25px;
-            height: 25px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: url("images/pigeon.jpg");
             background-size: cover;
@@ -81,7 +86,7 @@
         }
         .wolve{
             -webkit-appearance: none;
-            height: 10px;
+            height: 5px;
             border-radius: 5px;
             background: #d3d3d3;
             outline: none;
@@ -91,16 +96,16 @@
         .wolve::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 25px;
-            height: 25px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background: url("images/wolve.png");
+            background: url("images/coyote.webp");
             background-size: cover;
             cursor: pointer;
         }
         .squirrel{
             -webkit-appearance: none;
-            height: 10px;
+            height: 5px;
             border-radius: 5px;
             background: #d3d3d3;
             outline: none;
@@ -110,18 +115,113 @@
         .squirrel::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 25px;
-            height: 25px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: url("images/squirel.png");
             background-size: cover;
             cursor: pointer;
         }
+        .raccon{
+            -webkit-appearance: none;
+            height: 5px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+        .raccon::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: url("images/squirel.png");
+            background-size: cover;
+            cursor: pointer;
+        }
+        .cat{
+            -webkit-appearance: none;
+            height: 5px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+        .cat::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: url("images/squirel.png");
+            background-size: cover;
+            cursor: pointer;
+        }
+        .dog{
+            -webkit-appearance: none;
+            height: 5px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+        .dog::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: url("images/squirel.png");
+            background-size: cover;
+            cursor: pointer;
+        }
+        .rabbit{
+            -webkit-appearance: none;
+            height: 5px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+        .rabbit::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: url("images/squirel.png");
+            background-size: cover;
+            cursor: pointer;
+        }
+        .mice{
+            -webkit-appearance: none;
+            height: 5px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+        .mice::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: url("images/squirel.png");
+            background-size: cover;
+            cursor: pointer;
+        }
+        /* Generic animal slider styling for additional animals */
         button {
             width: 100px;
             height: 75px;
             padding: 0.75rem;
-            color: none;
             border: none;
             border-radius: 6px;
             font-size: 1rem;
@@ -133,7 +233,6 @@
         }
         
         button:hover {
-            background: #357ae8;
             background-image: url("images/barnClosed.jpg");
             background-size: cover;
 
@@ -149,30 +248,50 @@
     </style>
 </head>
 <body>
-    <div class="page-wrapper">
+<div class="page-wrapper">
     <div class="form-container">
         <h2>Where do these animals belong</h2>
         <form id="sliderForm">
             <div class="slider-group">
-                <label for="birds">Birds <span class="slider-value" id="birdsValue">5</span></label>
+                <label for="birds"><span class="text">Birds</span> <span class="slider-value" id="birdsValue">5</span></label>
                 <input type="range" id="birds" class="bird" name="birds" min="0" max="100" value="50">
             </div>
             <div class="slider-group">
-                <label for="wolves">Wolves <span class="slider-value" id="wolvesValue">5</span></label>
+                <label for="wolves"><span class="text">Coyote</span> <span class="slider-value" id="wolvesValue">5</span></label>
                 <input type="range" id="wolves" class="wolve" name="wolves" min="0" max="100" value="50">
             </div>
             <div class="slider-group">
-                <label for="squirrels">Squirrels <span class="slider-value" id="squirrelsValue">50</span></label>
+                <label for="squirrels"><span class="text">Squirrels</span> <span class="slider-value" id="squirrelsValue">50</span></label>
                 <input type="range" id="squirrels" class="squirrel" name="squirrels" min="0" max="100" value="50">
+            </div>
+            <div class="slider-group">
+                <label for="raccoons"><span class="text">Raccoons</span> <span class="slider-value" id="raccoonsValue">50</span></label>
+                <input type="range" id="raccoons" class="raccon" name="raccoons" min="0" max="100" value="50">
+            </div>
+            <div class="slider-group">
+                <label for="cats"><span class="text">Cats</span> <span class="slider-value" id="catsValue">50</span></label>
+                <input type="range" id="cats" class="cat" name="cats" min="0" max="100" value="50">
+            </div>
+            <div class="slider-group">
+                <label for="dogs"><span class="text">Dogs</span> <span class="slider-value" id="dogsValue">50</span></label>
+                <input type="range" id="dogs" class="dog" name="dogs" min="0" max="100" value="50">
+            </div>
+            <div class="slider-group">
+                <label for="rabbits"><span class="text">Rabbits</span> <span class="slider-value" id="rabbitsValue">50</span></label>
+                <input type="range" id="rabbits" class="rabbit" name="rabbits" min="0" max="100" value="50">
+            </div>
+            <div class="slider-group">
+                <label for="mice"><span class="text">Mice</span> <span class="slider-value" id="miceValue">50</span></label>
+                <input type="range" id="mice" class="mice" name="mice" min="0" max="100" value="50">
             </div>
             <button type="submit"></button>
         </form>
         <div class="result" id="result" style="display:none;"></div>
     </div>
-    </div>
+</div>
     <script>
         // Update slider value display
-        const sliders = ['birds', 'wolves', 'squirrels'];
+        const sliders = ['birds', 'wolves', 'squirrels', 'raccoons', 'cats', 'dogs', 'rabbits', 'mice'];
         sliders.forEach(slider => {
             const input = document.getElementById(slider);
             const valueDisplay = document.getElementById(slider + 'Value');
