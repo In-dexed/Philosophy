@@ -118,20 +118,23 @@
             cursor: pointer;
         }
         button {
-            width: 100%;
+            width: 100px;
+            height: 75px;
             padding: 0.75rem;
-            color: #fff;
+            color: none;
             border: none;
             border-radius: 6px;
             font-size: 1rem;
             cursor: pointer;
             background-image: url("images/barn.png");
             background-size: cover;
+            display: block;
+            margin: 0 auto;
         }
         
         button:hover {
             background: #357ae8;
-            background-image: url("images/barn.png");
+            background-image: url("images/barnClosed.jpg");
             background-size: cover;
 
         }
@@ -186,13 +189,13 @@
             sliders.forEach(slider => {
                 const value = document.getElementById(slider).value;
                 data[slider] = value;
-                settings[slider] = value < 50 ? 'Wild' : 'Urban';
+                settings[slider] = value < 50 ? 'Wild' : value > 50 ? 'Urban' : 'Liminal';
             });
 
             document.getElementById('result').style.display = 'block';
             document.getElementById('result').innerHTML =
                 `<strong>Submitted Data:</strong><br>` +
-                sliders.map(slider => `${slider.charAt(0).toUpperCase() + slider.slice(1)}: ${data[slider]} (${settings[slider]})`).join('<br>');
+                sliders.map(slider => `${slider.charAt(0).toUpperCase() + slider.slice(1)}: ${settings[slider]}`).join('<br>');
         });
     </script>
 </body>
