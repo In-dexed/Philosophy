@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider Form</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .page-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            background-image: url("images/UrbanWild.jpg");
+            background-size: cover;
+        }
+        .form-container {
+            background: none;
+            padding: 2rem 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            width: 5000px;
+            opacity: 1;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            outline: black;
+        }
+        p{
+            color: white;
+            font-weight: bold;
+        }
+        .slider-group {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            opacity: 1;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        input[type="range"] {
+            width: 100%;
+        }
+        .slider-value {
+            float: right;
+            font-size: 0.95em;
+            color: #555;
+        }
+        .bird{
+            -webkit-appearance: none;
+            height: 10px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+        .bird::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: url("images/pigeon.jpg");
+            background-size: cover;
+            cursor: pointer;
+        }
+        .wolve{
+            -webkit-appearance: none;
+            height: 10px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+        .wolve::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: url("images/wolve.png");
+            background-size: cover;
+            cursor: pointer;
+        }
+        .squirrel{
+            -webkit-appearance: none;
+            height: 10px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+        .squirrel::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: url("images/squirel.png");
+            background-size: cover;
+            cursor: pointer;
+        }
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            background-image: url("images/barn.png");
+            background-size: cover;
+        }
+        
+        button:hover {
+            background: #357ae8;
+            background-image: url("images/barn.png");
+            background-size: cover;
+
+        }
+        .result {
+            margin-top: 1.5rem;
+            background: #eaf4ff;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1.05em;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+    <div class="form-container">
+        <h2>Where do these animals belong</h2>
+        <form id="sliderForm">
+            <div class="slider-group">
+                <label for="birds">Birds <span class="slider-value" id="birdsValue">5</span></label>
+                <input type="range" id="birds" class="bird" name="birds" min="0" max="100" value="50">
+            </div>
+            <div class="slider-group">
+                <label for="wolves">Wolves <span class="slider-value" id="wolvesValue">5</span></label>
+                <input type="range" id="wolves" class="wolve" name="wolves" min="0" max="100" value="50">
+            </div>
+            <div class="slider-group">
+                <label for="squirrels">Squirrels <span class="slider-value" id="squirrelsValue">50</span></label>
+                <input type="range" id="squirrels" class="squirrel" name="squirrels" min="0" max="100" value="50">
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <div class="result" id="result" style="display:none;"></div>
+    </div>
+    </div>
+    <script>
+        // Update slider value display
+        const sliders = ['birds', 'wolves', 'squirrels'];
+        sliders.forEach(slider => {
+            const input = document.getElementById(slider);
+            const valueDisplay = document.getElementById(slider + 'Value');
+            input.addEventListener('input', () => {
+                valueDisplay.textContent = input.value;
+            });
+        });
+
+        // Handle form submission
+        document.getElementById('sliderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const data = {};
+            const settings = {}; // To store wild or urban setting
+
+            sliders.forEach(slider => {
+                const value = document.getElementById(slider).value;
+                data[slider] = value;
+                settings[slider] = value < 50 ? 'Wild' : 'Urban';
+            });
+
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').innerHTML =
+                `<strong>Submitted Data:</strong><br>` +
+                sliders.map(slider => `${slider.charAt(0).toUpperCase() + slider.slice(1)}: ${data[slider]} (${settings[slider]})`).join('<br>');
+        });
+    </script>
+</body>
+</html>
