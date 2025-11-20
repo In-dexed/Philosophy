@@ -139,6 +139,7 @@
 
         }
         .result {
+            text-align: center;
             margin-top: 1.5rem;
             background: #eaf4ff;
             padding: 1rem;
@@ -164,7 +165,7 @@
                 <label for="squirrels">Squirrels <span class="slider-value" id="squirrelsValue">50</span></label>
                 <input type="range" id="squirrels" class="squirrel" name="squirrels" min="0" max="100" value="50">
             </div>
-            <button type="submit">Submit</button>
+            <button type="submit"></button>
         </form>
         <div class="result" id="result" style="display:none;"></div>
     </div>
@@ -194,7 +195,7 @@
 
             document.getElementById('result').style.display = 'block';
             document.getElementById('result').innerHTML =
-                `<strong>Submitted Data:</strong><br>` +
+                `<strong>These animals are</strong><br>` +
                 sliders.map(slider => `${slider.charAt(0).toUpperCase() + slider.slice(1)}: ${settings[slider]}`).join('<br>');
         });
     </script>
