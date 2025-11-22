@@ -380,6 +380,10 @@
                 <label for="mice"><span class="text">Mice</span> <span class="slider-value" id="miceValue">50</span></label>
                 <input type="range" id="mice" class="mice" name="mice" min="0" max="100" value="50">
             </div>
+            <div class="slider-group">
+                <label for="society"><span class="text">Society</span> <span class="slider-value" id="societyValue">50</span></label>
+                <input type="range" id="society" class="animal" name="society" min="0" max="1" value="1">
+            </div>
             <button type="submit"></button>
         </form>
         <div class="result" id="result" style="display:none;"></div>
@@ -395,6 +399,15 @@
                 valueDisplay.textContent = input.value;
             });
         });
+
+        // Society slider: update display but do NOT include in submission
+        const societyInput = document.getElementById('society');
+        if (societyInput) {
+            const societyValueDisplay = document.getElementById('societyValue');
+            societyInput.addEventListener('input', () => {
+                societyValueDisplay.textContent = societyInput.value;
+            });
+        }
 
         // Handle form submission
         document.getElementById('sliderForm').addEventListener('submit', function(e) {
