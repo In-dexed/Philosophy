@@ -347,7 +347,15 @@
 <div class="page-wrapper">
     <div class="form-container">
         <h2>Where do these animals belong</h2>
-        <form id="sliderForm">
+        <form id="sliderForm" name="submit-to-google-sheet">
+            <div class="slider-group">
+                <label for="userName"><span class="text">Name</span></label>
+                <input type="text" id="userName" name="userName" placeholder="Enter your name">
+            </div>
+            <div class="slider-group">
+                <label for="userLocation"><span class="text">Location</span></label>
+                <input type="text" id="userLocation" name="userLocation" placeholder="Enter your location">
+            </div>
             <div class="slider-group">
                 <label for="birds"><span class="text">Birds</span> <span class="slider-value" id="birdsValue">5</span></label>
                 <input type="range" id="birds" class="bird" name="birds" min="0" max="100" value="50">
@@ -390,6 +398,9 @@
     </div>
 </div>
     <script>
+        // Google Apps Script URL for sending data to Google Sheet
+        const scriptURL = "https://script.google.com/macros/s/AKfycby9z2WFEZ4jp0_zZrG4jbrF11yTwNZPW8Ar_6r9hhmlCe2vqmvSTjPZbmGo0Pvp8wvH/exec";
+        
         // Update slider value display
         const sliders = ['birds', 'wolves', 'squirrels', 'raccoons', 'cats', 'dogs', 'rabbits', 'mice'];
         sliders.forEach(slider => {
@@ -409,22 +420,43 @@
             });
         }
 
-        // Handle form submission
-        document.getElementById('sliderForm').addEventListener('submit', function(e) {
+        // Handle form submission and send to Google Sheet
+        const form = document.forms["submit-to-google-sheet"];
+        form.addEventListener("submit", function(e) {
             e.preventDefault();
-            const data = {};
-            const settings = {}; // To store wild or urban setting
 
+            const data = {};
+            const settings = {};
+
+            // Collect slider values and settings
             sliders.forEach(slider => {
-                const value = document.getElementById(slider).value;
+                const value = Number(document.getElementById(slider).value);
                 data[slider] = value;
                 settings[slider] = value < 50 ? 'Wild' : value > 50 ? 'Urban' : 'Liminal';
             });
 
+            // Create FormData object
+            const formData = new FormData(form);
+
+            // Add slider values as JSON strings
+            formData.append("values", JSON.stringify(data));
+            formData.append("settings", JSON.stringify(settings));
+
+            // Display result message
             document.getElementById('result').style.display = 'block';
             document.getElementById('result').innerHTML =
                 `<strong>These animals are</strong><br>` +
                 sliders.map(slider => `${slider.charAt(0).toUpperCase() + slider.slice(1)}: ${settings[slider]}`).join('<br>');
+
+            // Send to Google Sheet
+            fetch(scriptURL, { method: "POST", body: formData })
+                .then((response) => {
+                    document.getElementById('result').innerHTML += `<div style="margin-top:.5rem;color:green;font-weight:600;">Submitted Successfully!</div>`;
+                })
+                .catch((error) => {
+                    document.getElementById('result').innerHTML += `<div style="margin-top:.5rem;color:crimson;font-weight:600;">Error: Something went wrong. Please try again!</div>`;
+                    console.error('Error:', error);
+                });
         });
     </script>
 </body>
